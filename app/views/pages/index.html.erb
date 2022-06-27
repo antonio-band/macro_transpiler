@@ -1,0 +1,58 @@
+<!-- inside app/views/welcome/index.html.erb -->
+<nav class="navbar navbar-light" style="background-color: #344659">
+  <a class="navbar-brand" href="#">
+    <img src="<%= image_path("logo3.png") %>" width="290" height="80" class="d-inline-block ps-lg-4" class="d-inline-block" alt="">
+  </a>
+</nav>
+
+<%= form_with model: @page do |form| %>
+  <form class="row g-3">
+    <div class="d-flex justify-content-lg-around">
+      <div class="p-3">
+        <%= form.label 'From', class: 'form-label' %>
+        <%= form.select(:from_system_type, options_for_select([['SolidWorks'], ['CATIA']])) %>
+      </div>
+
+      <div class="p-3">
+        <%= form.label 'To', class: 'form-label' %>
+        <%= form.select(:to_system_type, options_for_select([['SolidWorks'], ['CATIA']])) %>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-lg-between">
+      <div class="w-50 p-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Source code</label>
+        <textarea id='lineCounter' wrap='off' readonly>1.</textarea>
+        <textarea class="form-control green-border-focus" name="input_text" id='codeEditor' wrap='off'><%= page.input_text if defined?(page) && page %></textarea>
+      </div>
+
+      <div class="w-auto p-3">
+        <%= form.submit 'Translate', class: 'btn btn-primary mb-3' %>
+      </div>
+
+      <div class="w-50 p-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Result</label>
+        <textarea id='lineCounter' wrap='off' readonly>1.</textarea>
+        <textarea class="form-control" id='codeEditor' wrap='off'><%= page.result if defined?(page) && page %></textarea>
+      </div>
+    </div>
+  </form>
+<% end %>
+
+<div class="p-3">
+  <p class="h1 p-3">What is this?</p>
+  <p class="p-3">This is an online application for transferring a geometric model between specified systems.</p>
+
+  <p class="h1 p-3">How to start?</p>
+  <ol class="list-group list-group-numbered">
+    <li class="list-group-item">1. Download the maros text of the geometric model in the left window "Source code"</li>
+    <li class="list-group-item">2. Choose the system in which this macro was formed, choose the system from the list in
+      which you plan to get a macro of a geometric model
+    </li>
+    <li class="list-group-item">3. Click the translate button</li>
+    <li class="list-group-item">4. If necessary, repeat the above steps</li>
+  </ol>
+
+  <p class="h1 p-3">Source code</p>
+  <a href="https://github.com/StudyTube/backend" class="stretched-link">https://github.com/StudyTube/backend</a>
+</div>
